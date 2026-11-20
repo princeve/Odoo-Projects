@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST -->
+    <record id="website_sales_intelligence_view_website_sales_ai_prediction_list" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.ai.prediction.list</field>
+        <field name="model">website.sales.ai.prediction</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="prediction_datetime"/>
+                <field name="prediction_type"/>
+                <field name="state"/>
+                <field name="visitor_id"/>
+                <field name="lead_id" optional="show"/>
+                <field name="intent_score" optional="show"/>
+                <field name="conversion_probability_percent" optional="show"/>
+                <field name="next_best_action" optional="show"/>
+                <field name="provider" optional="hide"/>
+                <field name="model_name" optional="hide"/>
+                <field name="latency_ms" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM -->
+    <record id="website_sales_intelligence_view_website_sales_ai_prediction_form" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.ai.prediction.form</field>
+        <field name="model">website.sales.ai.prediction</field>
+        <field name="arch" type="xml">
+            <form string="Website Sales AI Prediction">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Overview">
+                            <field name="prediction_uuid" readonly="1"/>
+                            <field name="prediction_datetime"/>
+                            <field name="state"/>
+                            <field name="prediction_type"/>
+                            <field name="ai_client_id"/>
+                        </group>
+
+                        <group string="Context">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="website_id"/>
+                            <field name="visitor_id"/>
+                            <field name="session_id"/>
+                            <field name="event_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Business Links">
+                        <group>
+                            <field name="lead_id"/>
+                            <field name="partner_id"/>
+                            <field name="sale_order_id"/>
+                        </group>
+                        <group>
+                            <field name="target_model"/>
+                            <field name="target_record_id"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Predictions">
+                            <group>
+                                <group>
+                                    <field name="intent_score"/>
+                                    <field name="conversion_probability"/>
+                                    <field name="conversion_probability_percent" readonly="1"/>
+                                    <field name="confidence_score"/>
+                                </group>
+                                <group>
+                                    <field name="next_best_action"/>
+                                    <field name="predicted_segment"/>
+                                    <field name="predicted_label"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <field name="summary"/>
+                                <field name="rationale"/>
+                            </group>
+                        </page>
+
+                        <page string="Provider">
+                            <group>
+                                <group>
+                                    <field name="provider"/>
+                                    <field name="model_name"/>
+                                    <field name="ai_request_id"/>
+                                </group>
+                                <group>
+                                    <field name="latency_ms"/>
+                                    <field name="prompt_tokens"/>
+                                    <field name="completion_tokens"/>
+                                    <field name="total_tokens"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <group>
+                                    <field name="correlation_id"/>
+                                    <field name="trace_id"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Prompts">
+                            <group>
+                                <field name="system_prompt"/>
+                                <field name="user_prompt"/>
+                            </group>
+                        </page>
+
+                        <page string="Payloads">
+                            <group>
+                                <field name="feature_payload_json" placeholder='{"example": "features"}'/>
+                                <field name="raw_response_json" placeholder='{"example": "raw"}'/>
+                            </group>
+                        </page>
+
+                        <page string="Approval">
+                            <group>
+                                <group>
+                                    <field name="approved_by_user_id"/>
+                                    <field name="approved_at"/>
+                                </group>
+                                <group>
+                                    <field name="approval_note"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Technical">
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="website_sales_intelligence_action_website_sales_ai_predictions" model="ir.actions.act_window">
+        <field name="name">AI Predictions</field>
+        <field name="res_model">website.sales.ai.prediction</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

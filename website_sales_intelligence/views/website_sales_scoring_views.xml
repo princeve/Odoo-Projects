@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST -->
+    <record id="website_sales_intelligence_view_website_sales_scoring_list" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.scoring.list</field>
+        <field name="model">website.sales.scoring</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" optional="hide"/>
+                <field name="name"/>
+                <field name="is_enabled"/>
+                <field name="mode"/>
+                <field name="website_id" optional="hide"/>
+                <field name="use_ai" optional="hide"/>
+                <field name="ai_weight" optional="hide"/>
+                <field name="cold_threshold" optional="hide"/>
+                <field name="warm_threshold" optional="hide"/>
+                <field name="hot_threshold" optional="hide"/>
+                <field name="last_updated_at" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM -->
+    <record id="website_sales_intelligence_view_website_sales_scoring_form" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.scoring.form</field>
+        <field name="model">website.sales.scoring</field>
+        <field name="arch" type="xml">
+            <form string="Website Sales Scoring">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Overview">
+                            <field name="active"/>
+                            <field name="sequence"/>
+                            <field name="is_enabled"/>
+                            <field name="mode"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="website_id"/>
+                        </group>
+
+                        <group string="Outputs">
+                            <field name="write_profile"/>
+                            <field name="write_visitor"/>
+                            <field name="create_ai_prediction_record"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Weights">
+                            <group string="Core Events">
+                                <group>
+                                    <field name="weight_page_view"/>
+                                    <field name="weight_product_view"/>
+                                    <field name="weight_search"/>
+                                    <field name="weight_form_submit"/>
+                                    <field name="weight_rfq_submit"/>
+                                </group>
+                                <group>
+                                    <field name="weight_add_to_cart"/>
+                                    <field name="weight_remove_from_cart"/>
+                                    <field name="weight_cart_view"/>
+                                    <field name="weight_checkout_start"/>
+                                    <field name="weight_checkout_submit"/>
+                                </group>
+                            </group>
+
+                            <group string="Payments">
+                                <group>
+                                    <field name="weight_payment_success"/>
+                                    <field name="weight_payment_failed"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Decay">
+                            <group>
+                                <group>
+                                    <field name="enable_time_decay"/>
+                                    <field name="decay_half_life_hours"/>
+                                </group>
+                                <group>
+                                    <field name="max_event_age_days"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Thresholds">
+                            <group string="Intent Levels">
+                                <group>
+                                    <field name="cold_threshold"/>
+                                    <field name="warm_threshold"/>
+                                    <field name="hot_threshold"/>
+                                </group>
+                            </group>
+
+                            <group string="Funnel">
+                                <group>
+                                    <field name="funnel_awareness_threshold"/>
+                                    <field name="funnel_consideration_threshold"/>
+                                </group>
+                                <group>
+                                    <field name="funnel_intent_threshold"/>
+                                    <field name="funnel_checkout_threshold"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Adjustments">
+                            <group>
+                                <group string="Boosts">
+                                    <field name="boost_authenticated"/>
+                                    <field name="boost_contact_available"/>
+                                    <field name="boost_repeat_sessions"/>
+                                    <field name="repeat_sessions_min"/>
+                                </group>
+                                <group string="Penalties / Cart">
+                                    <field name="penalty_bounce"/>
+                                    <field name="bounce_session_seconds_max"/>
+                                    <field name="boost_high_cart_value"/>
+                                    <field name="high_cart_value_min"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="AI">
+                            <group>
+                                <group>
+                                    <field name="use_ai"/>
+                                    <field name="ai_client_id"/>
+                                    <field name="ai_prediction_type"/>
+                                </group>
+                                <group>
+                                    <field name="ai_weight"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Notes">
+                            <group>
+                                <field name="description"/>
+                            </group>
+                            <group string="Audit">
+                                <group>
+                                    <field name="last_updated_by_user_id" readonly="1"/>
+                                    <field name="last_updated_at" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="website_sales_intelligence_action_website_sales_scoring" model="ir.actions.act_window">
+        <field name="name">Scoring</field>
+        <field name="res_model">website.sales.scoring</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

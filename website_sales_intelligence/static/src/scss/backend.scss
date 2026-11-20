@@ -1,0 +1,241 @@
+/* Website Sales Intelligence Dashboard Styling (Backend) */
+
+.wsi_dashboard {
+  max-height: calc(100vh - 110px); /* header space */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+}
+
+/* Header */
+.wsi_header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  .wsi_title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .wsi_subtitle {
+    margin-top: 4px;
+    color: #6c757d;
+  }
+
+  .wsi_chip {
+    border-radius: 999px;
+    padding: 6px 12px;
+    margin-right: 6px;
+  }
+  .wsi_primary_btn {
+    border-radius: 10px;
+    padding: 8px 14px;
+    margin-left: 10px;
+  }
+}
+
+/* Grid helpers */
+.wsi_grid {
+  display: grid;
+  gap: 14px;
+}
+
+.wsi_grid_kpi {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 14px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+.wsi_grid_main {
+  grid-template-columns: 2fr 1fr;
+  margin-bottom: 14px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+.wsi_card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+  padding: 14px;
+}
+
+.wsi_card_large {
+  min-height: 320px;
+}
+
+.wsi_card_full {
+  width: 100%;
+}
+
+.wsi_card_header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  .wsi_card_title {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .wsi_card_note {
+    font-size: 12px;
+    color: #6c757d;
+  }
+}
+
+/* KPI Cards */
+.wsi_kpi_card {
+  padding: 14px;
+}
+
+.wsi_kpi_top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wsi_kpi_title {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.wsi_kpi_trend {
+  font-size: 12px;
+  font-weight: 700;
+  color: #198754;
+}
+
+.wsi_kpi_value {
+  font-size: 26px;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+.wsi_kpi_hint {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Table */
+.wsi_table {
+  display: grid;
+  gap: 8px;
+}
+
+.wsi_table_head {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6c757d;
+  padding: 6px 8px;
+}
+
+.wsi_table_row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.02);
+}
+
+.wsi_table_head_4,
+.wsi_table_row_4 {
+  grid-template-columns: 2.2fr 0.8fr 0.8fr 0.8fr;
+}
+
+/* Fake chart */
+.wsi_fake_chart {
+  margin-top: 8px;
+}
+
+.wsi_fake_chart_row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+
+  span {
+    color: #6c757d;
+    font-size: 12px;
+    width: 32px;
+  }
+}
+
+.wsi_fake_bar {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(13, 110, 253, 0.35);
+}
+
+/* Badges */
+.wsi_badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(13, 110, 253, 0.10);
+  border: 1px solid rgba(13, 110, 253, 0.25);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Links */
+.wsi_links {
+  display: grid;
+  gap: 10px;
+}
+
+.wsi_link_item {
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px dashed rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.01);
+
+  .wsi_link_title {
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+  .wsi_link_hint {
+    font-size: 12px;
+    color: #6c757d;
+  }
+}
+
+.wsi_stack {
+  display: grid;
+  gap: 14px;
+}
+
+.wsi_mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+}
+
+.wsi_section_footer {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.wsi_tip {
+  font-size: 12px;
+  color: #6c757d;
+}

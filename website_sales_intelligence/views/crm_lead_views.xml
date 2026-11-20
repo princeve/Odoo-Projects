@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add columns to CRM Lead list -->
+    <!-- <record id="website_sales_intelligence_crm_lead_view_list_inherit" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.crm.lead.list.inherit</field>
+        <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="website_sales_intelligence_is_hot" optional="show"/>
+                <field name="website_sales_intelligence_intent_score" optional="show"/>
+                <field name="website_sales_intelligence_intent_level" optional="show"/>
+                <field name="website_sales_intelligence_funnel_stage" optional="show"/>
+                <field name="website_sales_intelligence_last_seen" optional="hide"/>
+            </xpath>
+
+        </field>
+    </record> -->
+
+    <!-- Add a full tab to CRM Lead form -->
+    <record id="website_sales_intelligence_crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Website Intelligence" name="website_sales_intelligence_page">
+
+                    <group>
+                        <group string="Link">
+                            <field name="website_sales_intelligence_visitor_id"/>
+                            <field name="website_sales_intelligence_website_id" readonly="1"/>
+                            <field name="website_sales_intelligence_company_id" readonly="1"/>
+                        </group>
+
+                        <group string="Snapshot">
+                            <field name="website_sales_intelligence_intent_score" readonly="1"/>
+                            <field name="website_sales_intelligence_intent_level" readonly="1"/>
+                            <field name="website_sales_intelligence_funnel_stage" readonly="1"/>
+                            <field name="website_sales_intelligence_is_hot" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Activity">
+                            <field name="website_sales_intelligence_first_seen" readonly="1"/>
+                            <field name="website_sales_intelligence_last_seen" readonly="1"/>
+                            <field name="website_sales_intelligence_session_count" readonly="1"/>
+                            <field name="website_sales_intelligence_event_count" readonly="1"/>
+                            <field name="website_sales_intelligence_last_event_type" readonly="1"/>
+                        </group>
+
+                        <group string="Last Touch">
+                            <field name="website_sales_intelligence_last_url" readonly="1"/>
+                            <field name="website_sales_intelligence_last_referrer" readonly="1"/>
+                            <field name="website_sales_intelligence_device_type" readonly="1"/>
+                            <field name="website_sales_intelligence_consent_state" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Commerce Signals">
+                        <group>
+                            <field name="website_sales_intelligence_cart_items_count" readonly="1"/>
+                            <field name="website_sales_intelligence_cart_value" readonly="1"/>
+                            <field name="website_sales_intelligence_currency_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="website_sales_intelligence_checkout_started" readonly="1"/>
+                            <field name="website_sales_intelligence_checkout_abandoned" readonly="1"/>
+                            <field name="website_sales_intelligence_rfq_submitted" readonly="1"/>
+                            <field name="website_sales_intelligence_contact_submitted" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Marketing Attribution">
+                        <group>
+                            <field name="website_sales_intelligence_utm_source" readonly="1"/>
+                            <field name="website_sales_intelligence_utm_medium" readonly="1"/>
+                            <field name="website_sales_intelligence_utm_campaign" readonly="1"/>
+                            <field name="website_sales_intelligence_utm_term" readonly="1"/>
+                            <field name="website_sales_intelligence_utm_content" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="website_sales_intelligence_gclid" readonly="1"/>
+                            <field name="website_sales_intelligence_fbclid" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Interest">
+                        <field name="website_sales_intelligence_interest_product_ids" widget="many2many_tags" readonly="1"/>
+                        <!-- <field name="website_sales_intelligence_interest_category_ids" widget="many2many_tags" readonly="1"/> -->
+                        <field name="website_sales_intelligence_search_keywords" readonly="1"/>
+                    </group>
+
+                    <group string="Location">
+                        <group>
+                            <field name="website_sales_intelligence_country_id" readonly="1"/>
+                            <field name="website_sales_intelligence_region" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="website_sales_intelligence_city" readonly="1"/>
+                            <field name="website_sales_intelligence_timezone" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="AI (Future)">
+                        <group>
+                            <field name="website_sales_intelligence_ai_conversion_probability" readonly="1"/>
+                            <field name="website_sales_intelligence_ai_next_best_action" readonly="1"/>
+                            <field name="website_sales_intelligence_ai_model_version" readonly="1"/>
+                            <field name="website_sales_intelligence_ai_last_scored_at" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="website_sales_intelligence_ai_summary" readonly="1"/>
+                        </group>
+                    </group>
+
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
+
+
+

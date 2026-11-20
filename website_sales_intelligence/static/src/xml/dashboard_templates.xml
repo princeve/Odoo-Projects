@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="website_sales_intelligence.DashboardMain">
+        <div class="wsi_dashboard o_content">
+
+            <!-- Header -->
+            <div class="wsi_header">
+                <div class="wsi_header_left">
+                    <div class="wsi_title">Website Sales Intelligence</div>
+                    <div class="wsi_subtitle">
+                        Dashboard • Intent • Automation • Attribution • AI
+                    </div>
+
+                    <t t-if="state.server_time">
+                        <div class="text-muted" style="font-size:12px;">
+                            Last sync: <t t-esc="state.server_time"/>
+                            <t t-if="state.syncing"> • syncing…</t>
+                        </div>
+                    </t>
+
+                    <t t-if="state.error">
+                        <div class="alert alert-warning mt-2" role="alert">
+                            <t t-esc="state.error"/>
+                        </div>
+                    </t>
+                </div>
+
+                <div class="wsi_header_right">
+                    <button class="btn wsi_chip"
+                            t-att-class="state.range === 'today' ? 'btn btn-primary wsi_chip' : 'btn btn-light wsi_chip'"
+                            t-on-click="() => setRange('today')">Today</button>
+
+                    <button class="btn wsi_chip"
+                            t-att-class="state.range === '7d' ? 'btn btn-primary wsi_chip' : 'btn btn-light wsi_chip'"
+                            t-on-click="() => setRange('7d')">Last 7 Days</button>
+
+                    <button class="btn wsi_chip"
+                            t-att-class="state.range === '30d' ? 'btn btn-primary wsi_chip' : 'btn btn-light wsi_chip'"
+                            t-on-click="() => setRange('30d')">Last 30 Days</button>
+
+                    <button class="btn btn-outline-secondary" t-on-click="load">Refresh</button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <t t-if="state.firstLoading">
+                <div class="alert alert-info mt-2">Loading dashboard…</div>
+            </t>
+
+            <!-- KPI Cards -->
+            <div class="wsi_grid wsi_grid_kpi">
+                <t t-foreach="state.kpis" t-as="k" t-key="k.title">
+                    <div class="wsi_card wsi_kpi_card">
+                        <div class="wsi_kpi_top">
+                            <div class="wsi_kpi_title"><t t-esc="k.title"/></div>
+                            <div class="wsi_kpi_trend"><t t-esc="k.trend"/></div>
+                        </div>
+                        <div class="wsi_kpi_value"><t t-esc="k.value"/></div>
+                        <div class="wsi_kpi_hint"><t t-esc="k.hint"/></div>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Main Layout -->
+            <div class="wsi_grid wsi_grid_main">
+
+                <!-- Left: Traffic Trend (dynamic bars if data, else static placeholder) -->
+                <div class="wsi_card wsi_card_large">
+                    <div class="wsi_card_header">
+                        <div class="wsi_card_title">Traffic Trend</div>
+                        <div class="wsi_card_note">Events per day (auto-updates on FULL sync)</div>
+                    </div>
+
+                    <t t-if="state.trafficTrend">
+                        <div class="wsi_fake_chart">
+                            <t t-foreach="state.trafficTrend" t-as="pt" t-key="pt.label">
+                                <div class="wsi_fake_chart_row">
+                                    <div class="wsi_fake_bar" t-att-style="'width:' + (pt.pct || 0) + '%'"></div>
+                                    <span><t t-esc="pt.label"/> (<t t-esc="pt.count"/>)</span>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <!-- keep your old static bars if no data -->
+                        <div class="wsi_fake_chart">
+                            <div class="wsi_fake_chart_row">
+                                <div class="wsi_fake_bar" style="width: 30%"></div><span>Mon</span>
+                            </div>
+                            <div class="wsi_fake_chart_row">
+                                <div class="wsi_fake_bar" style="width: 55%"></div><span>Tue</span>
+                            </div>
+                            <div class="wsi_fake_chart_row">
+                                <div class="wsi_fake_bar" style="width: 42%"></div><span>Wed</span>
+                            </div>
+                            <div class="wsi_fake_chart_row">
+                                <div class="wsi_fake_bar" style="width: 70%"></div><span>Thu</span>
+                            </div>
+                            <div class="wsi_fake_chart_row">
+                                <div class="wsi_fake_bar" style="width: 90%"></div><span>Fri</span>
+                            </div>
+                        </div>
+                    </t>
+
+                    <div class="wsi_section_footer">
+                        <div class="wsi_tip">
+                            Tip: This is computed from <code>website.sales.event</code>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Advanced static blocks -->
+                <div class="wsi_stack">
+
+                    <!-- Map (Static UI) -->
+                    <div class="wsi_card">
+                        <div class="wsi_card_header">
+                            <div class="wsi_card_title">Visitor Map</div>
+                            <div class="wsi_card_note">Static preview (we can connect later)</div>
+                        </div>
+
+                        <div class="wsi_table">
+                            <div class="wsi_table_head">
+                                <div>City</div>
+                                <div>Country</div>
+                                <div>Visitors</div>
+                                <div>Status</div>
+                            </div>
+
+                            <t t-foreach="state.mapPins" t-as="m" t-key="m.city">
+                                <div class="wsi_table_row">
+                                    <div class="wsi_mono"><t t-esc="m.city"/></div>
+                                    <div><t t-esc="m.country"/></div>
+                                    <div><t t-esc="m.count"/></div>
+                                    <div><span class="wsi_badge">Live</span></div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Device Mix (Static UI) -->
+                    <div class="wsi_card">
+                        <div class="wsi_card_header">
+                            <div class="wsi_card_title">Device Mix</div>
+                            <div class="wsi_card_note">Static preview</div>
+                        </div>
+
+                        <t t-foreach="state.deviceMix" t-as="d" t-key="d.label">
+                            <div style="display:flex;justify-content:space-between;margin:6px 0;">
+                                <div><t t-esc="d.label"/></div>
+                                <div class="wsi_mono"><t t-esc="d.value"/></div>
+                            </div>
+                        </t>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Hot Visitors (dynamic, do not reset to 0 now) -->
+            <div class="wsi_card">
+                <div class="wsi_card_header">
+                    <div class="wsi_card_title">Hot Visitors</div>
+                    <div class="wsi_card_note">Auto-refresh (full sync)</div>
+                </div>
+
+                <div class="wsi_table">
+                    <div class="wsi_table_head">
+                        <div>Visitor</div>
+                        <div>Score</div>
+                        <div>Stage</div>
+                        <div>Next Action</div>
+                    </div>
+
+                    <t t-if="state.hotVisitors">
+                        <t t-foreach="state.hotVisitors" t-as="v" t-key="v.name">
+                            <div class="wsi_table_row">
+                                <div class="wsi_mono"><t t-esc="v.name"/></div>
+                                <div><t t-esc="v.score"/></div>
+                                <div><span class="wsi_badge"><t t-esc="v.stage"/></span></div>
+                                <div><t t-esc="v.action"/></div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="text-muted" style="padding:12px;">No hot visitors yet.</div>
+                    </t>
+                </div>
+            </div>
+
+            <!-- Top Pages (dynamic) -->
+            <div class="wsi_card wsi_card_full">
+                <div class="wsi_card_header">
+                    <div class="wsi_card_title">Top Pages</div>
+                    <div class="wsi_card_note">Auto-refresh (full sync)</div>
+                </div>
+
+                <div class="wsi_table">
+                    <div class="wsi_table_head wsi_table_head_4">
+                        <div>Page</div>
+                        <div>Views</div>
+                        <div>Avg Time</div>
+                        <div>Bounce</div>
+                    </div>
+
+                    <t t-if="state.topPages">
+                        <t t-foreach="state.topPages" t-as="p" t-key="p.page">
+                            <div class="wsi_table_row wsi_table_row_4">
+                                <div class="wsi_mono"><t t-esc="p.page"/></div>
+                                <div><t t-esc="p.views"/></div>
+                                <div><t t-esc="p.avg_time"/></div>
+                                <div><t t-esc="p.bounce"/></div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="text-muted" style="padding:12px;">No page data yet.</div>
+                    </t>
+                </div>
+            </div>
+
+        </div>
+    </t>
+</templates>

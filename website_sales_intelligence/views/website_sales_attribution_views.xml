@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST -->
+    <record id="website_sales_intelligence_view_website_sales_attribution_list" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.attribution.list</field>
+        <field name="model">website.sales.attribution</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="attribution_datetime"/>
+                <field name="attribution_model"/>
+                <field name="state"/>
+                <field name="marketing_channel"/>
+                <field name="visitor_id"/>
+                <field name="lead_id" optional="show"/>
+                <field name="sale_order_id" optional="show"/>
+                <field name="utm_source" optional="show"/>
+                <field name="utm_medium" optional="show"/>
+                <field name="utm_campaign" optional="show"/>
+                <field name="attributed_revenue" optional="show"/>
+                <field name="attribution_weight" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM -->
+    <record id="website_sales_intelligence_view_website_sales_attribution_form" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.attribution.form</field>
+        <field name="model">website.sales.attribution</field>
+        <field name="arch" type="xml">
+            <form string="Website Sales Attribution">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Overview">
+                            <field name="attribution_uuid" readonly="1"/>
+                            <field name="attribution_datetime"/>
+                            <field name="state"/>
+                            <field name="attribution_model"/>
+                            <field name="attribution_weight"/>
+                            <field name="attribution_confidence"/>
+                        </group>
+
+                        <group string="Scope">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="website_id"/>
+                            <field name="currency_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Links">
+                        <group>
+                            <field name="visitor_id"/>
+                            <field name="session_id"/>
+                            <field name="event_id"/>
+                        </group>
+                        <group>
+                            <field name="lead_id"/>
+                            <field name="partner_id"/>
+                            <field name="sale_order_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Target Reference (Future Proof)">
+                        <field name="target_model"/>
+                        <field name="target_record_id"/>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Marketing">
+                            <group>
+                                <group>
+                                    <field name="marketing_channel"/>
+                                    <field name="utm_source"/>
+                                    <field name="utm_medium"/>
+                                    <field name="utm_campaign"/>
+                                    <field name="utm_term"/>
+                                    <field name="utm_content"/>
+                                </group>
+                                <group>
+                                    <field name="gclid"/>
+                                    <field name="fbclid"/>
+                                    <field name="msclkid"/>
+                                    <field name="campaign_id"/>
+                                    <field name="source_id"/>
+                                    <field name="medium_id"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Landing &amp; Referrer">
+                            <group>
+                                <group>
+                                    <field name="landing_url"/>
+                                    <field name="landing_path"/>
+                                </group>
+                                <group>
+                                    <field name="referrer_url"/>
+                                    <field name="referrer_domain"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Revenue">
+                            <group>
+                                <group>
+                                    <field name="attributed_revenue"/>
+                                    <field name="attributed_value"/>
+                                </group>
+                                <group>
+                                    <field name="order_amount_total"/>
+                                    <field name="lead_expected_revenue"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Touchpoints">
+                            <group>
+                                <group>
+                                    <field name="first_touch_datetime"/>
+                                    <field name="last_touch_datetime"/>
+                                </group>
+                                <group>
+                                    <field name="touchpoint_count"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Debug">
+                            <group>
+                                <group>
+                                    <field name="correlation_id"/>
+                                    <field name="trace_id"/>
+                                </group>
+                                <group>
+                                    <field name="compute_note"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="payload_json" placeholder='{"example": "attribution"}'/>
+                            </group>
+                        </page>
+
+                        <page string="Technical">
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="website_sales_intelligence_action_website_sales_attributions" model="ir.actions.act_window">
+        <field name="name">Attributions</field>
+        <field name="res_model">website.sales.attribution</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

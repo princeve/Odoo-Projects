@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- =========================================================
+         ROOT MENU: opens Dashboard FIRST
+         ========================================================= -->
+    <menuitem id="website_sales_intelligence_menu_root"
+              name="Website Sales Intelligence"
+              action="website_sales_intelligence_action_dashboard"
+              sequence="10"/>
+
+    <!-- =========================================================
+         DASHBOARD (explicit menu also)
+         ========================================================= -->
+    <menuitem id="website_sales_intelligence_menu_dashboard"
+              name="Dashboard"
+              parent="website_sales_intelligence_menu_root"
+              action="website_sales_intelligence_action_dashboard"
+              sequence="10"/>
+
+    <!-- =========================================================
+         TRACKING DATA
+         ========================================================= -->
+    <menuitem id="website_sales_intelligence_menu_tracking"
+              name="Tracking"
+              parent="website_sales_intelligence_menu_root"
+              sequence="20"/>
+
+    <menuitem id="website_sales_intelligence_menu_visitors"
+              name="Visitors"
+              parent="website_sales_intelligence_menu_tracking"
+              action="website_sales_intelligence_action_website_sales_visitors"
+              sequence="10"/>
+
+    <menuitem id="website_sales_intelligence_menu_sessions"
+              name="Sessions"
+              parent="website_sales_intelligence_menu_tracking"
+              action="website_sales_intelligence_action_website_sales_sessions"
+              sequence="20"/>
+
+    <menuitem id="website_sales_intelligence_menu_events"
+              name="Events"
+              parent="website_sales_intelligence_menu_tracking"
+              action="website_sales_intelligence_action_website_sales_events"
+              sequence="30"/>
+
+    <!-- =========================================================
+         INTELLIGENCE (Profiles / Scoring / AI)
+         ========================================================= -->
+    <menuitem id="website_sales_intelligence_menu_intelligence"
+              name="Intelligence"
+              parent="website_sales_intelligence_menu_root"
+              sequence="30"/>
+
+    <menuitem id="website_sales_intelligence_menu_profiles"
+              name="Profiles"
+              parent="website_sales_intelligence_menu_intelligence"
+              action="website_sales_intelligence_action_website_sales_profiles"
+              sequence="10"/>
+
+    <menuitem id="website_sales_intelligence_menu_scoring"
+              name="Scoring"
+              parent="website_sales_intelligence_menu_intelligence"
+              action="website_sales_intelligence_action_website_sales_scoring"
+              sequence="20"/>
+
+    <menuitem id="website_sales_intelligence_menu_attributions"
+              name="Attributions"
+              parent="website_sales_intelligence_menu_intelligence"
+              action="website_sales_intelligence_action_website_sales_attributions"
+              sequence="30"/>
+
+    <!-- =========================================================
+         AUTOMATION (Rules / Logs)
+         ========================================================= -->
+    <menuitem id="website_sales_intelligence_menu_automation"
+              name="Automation"
+              parent="website_sales_intelligence_menu_root"
+              sequence="40"/>
+
+    <menuitem id="website_sales_intelligence_menu_rules"
+              name="Automation Rules"
+              parent="website_sales_intelligence_menu_automation"
+              action="website_sales_intelligence_action_website_sales_rules"
+              sequence="10"/>
+
+    <menuitem id="website_sales_intelligence_menu_action_logs"
+              name="Action Logs"
+              parent="website_sales_intelligence_menu_automation"
+              action="website_sales_intelligence_action_website_sales_action_logs"
+              sequence="20"/>
+
+    <!-- =========================================================
+         AI (Clients / Predictions)
+         ========================================================= -->
+    <menuitem id="website_sales_intelligence_menu_ai"
+              name="AI"
+              parent="website_sales_intelligence_menu_root"
+              sequence="50"/>
+
+    <menuitem id="website_sales_intelligence_menu_ai_clients"
+              name="AI Clients"
+              parent="website_sales_intelligence_menu_ai"
+              action="website_sales_intelligence_action_website_sales_ai_clients"
+              sequence="10"/>
+
+    <menuitem id="website_sales_intelligence_menu_ai_predictions"
+              name="AI Predictions"
+              parent="website_sales_intelligence_menu_ai"
+              action="website_sales_intelligence_action_website_sales_ai_predictions"
+              sequence="20"/>
+
+   <menuitem id="website_sales_intelligence_menu_configuration"
+              name="Configuration"
+              parent="website_sales_intelligence_menu_root"
+              sequence="90"
+              groups="base.group_system"/>
+
+    <menuitem id="website_sales_intelligence_menu_settings"
+              name="Settings"
+              parent="website_sales_intelligence_menu_configuration"
+              action="website_sales_intelligence_action_settings"
+              sequence="10"
+              groups="base.group_system"/>
+
+
+</odoo>

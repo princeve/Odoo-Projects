@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST VIEW -->
+    <record id="website_sales_intelligence_view_website_sales_action_log_list" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.action.log.list</field>
+        <field name="model">website.sales.action.log</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="action_datetime"/>
+                <field name="action_type"/>
+                <field name="state"/>
+                <field name="visitor_id"/>
+                <field name="lead_id"/>
+                <field name="partner_id"/>
+                <!-- <field name="rule_id"/> -->
+                <field name="trigger_source"/>
+                <field name="latency_ms" optional="hide"/>
+                <field name="correlation_id" optional="hide"/>
+                <field name="triggered_by_user_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="website_sales_intelligence_view_website_sales_action_log_form" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.action.log.form</field>
+        <field name="model">website.sales.action.log</field>
+        <field name="arch" type="xml">
+            <form string="Website Sales Action Log">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Overview">
+                            <field name="action_uuid" readonly="1"/>
+                            <field name="action_datetime"/>
+                            <field name="state"/>
+                            <field name="is_success" readonly="1"/>
+                            <field name="action_type"/>
+                            <field name="action_title"/>
+                        </group>
+
+                        <group string="Trigger">
+                            <field name="trigger_source"/>
+                            <field name="triggered_by_user_id"/>
+                            <field name="executed_by_user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="website_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Business Context">
+                        <group>
+                            <field name="visitor_id"/>
+                            <!-- <field name="session_id"/> -->
+                            <!-- <field name="event_id"/> -->
+                        </group>
+                        <group>
+                            <field name="lead_id"/>
+                            <field name="partner_id"/>
+                            <field name="sale_order_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Target Reference (Future Proof)">
+                        <field name="target_model"/>
+                        <field name="target_record_id"/>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Automation">
+                            <group>
+                                <group>
+                                    <!-- <field name="rule_id"/> -->
+                                    <field name="rule_name"/>
+                                    <field name="rule_version"/>
+                                </group>
+                                <group>
+                                    <field name="retry_count"/>
+                                    <field name="is_retry"/>
+                                    <field name="latency_ms"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="action_reason"/>
+                            </group>
+                        </page>
+
+                        <page string="AI">
+                            <group>
+                                <group>
+                                    <field name="ai_provider"/>
+                                    <field name="ai_model_name"/>
+                                    <field name="ai_request_id"/>
+                                </group>
+                                <group>
+                                    <field name="correlation_id"/>
+                                    <field name="trace_id"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Attribution Snapshot">
+                            <group>
+                                <group>
+                                    <field name="last_url"/>
+                                    <field name="last_referrer"/>
+                                </group>
+                                <group>
+                                    <field name="utm_source"/>
+                                    <field name="utm_medium"/>
+                                    <field name="utm_campaign"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Payloads">
+                            <group>
+                                <field name="request_payload_json" placeholder='{"example": "request"}'/>
+                                <field name="response_payload_json" placeholder='{"example": "response"}'/>
+                            </group>
+                        </page>
+
+                        <page string="Errors">
+                            <group>
+                                <field name="error_message"/>
+                                <field name="error_traceback"/>
+                            </group>
+                        </page>
+
+                        <page string="Notes">
+                            <group>
+                                <field name="note"/>
+                                <field name="active"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="website_sales_intelligence_action_website_sales_action_logs" model="ir.actions.act_window">
+        <field name="name">Action Logs</field>
+        <field name="res_model">website.sales.action.log</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
