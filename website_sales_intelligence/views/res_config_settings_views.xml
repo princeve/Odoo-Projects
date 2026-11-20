@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- =========================================================
+         Settings sidebar APP + blocks
+         ========================================================= -->
+    <record id="website_sales_intelligence_view_res_config_settings_form" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+
+        <!-- IMPORTANT: inherit BASE settings to create your own left tab -->
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+
+        <field name="priority" eval="60"/>
+        <field name="arch" type="xml">
+
+            <!-- Add a new Settings App tab in the left sidebar -->
+            <xpath expr="//form" position="inside">
+
+                <app name="website_sales_intelligence"
+                     string="Website Sales Intelligence"
+                     icon="/website_sales_intelligence/static/description/icon.png">
+
+                    <!-- =======================================================
+                         Website Sales Intelligence
+                         ======================================================= -->
+                    <block id="website_sales_intelligence_block_root"
+                           title="Website Sales Intelligence">
+
+                        <setting id="website_sales_intelligence_setting_master_enabled"
+                                 string="Enable Website Sales Intelligence">
+                            <field name="website_sales_intelligence_enabled"/>
+                            <div class="text-muted">
+                                Master switch for the complete Website Sales Intelligence module.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_tracking_enabled"
+                                 string="Enable Website Tracking">
+                            <field name="website_sales_intelligence_tracking_enabled"/>
+                            <div class="text-muted">
+                                If disabled, tracking endpoint ignores incoming website events.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_scoring_enabled"
+                                 string="Enable Intent Scoring">
+                            <field name="website_sales_intelligence_scoring_enabled"/>
+                            <div class="text-muted">
+                                Enable scoring engine (cron-based). Keep OFF until implemented.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_automation_enabled"
+                                 string="Enable Automation Rules">
+                            <field name="website_sales_intelligence_automation_enabled"/>
+                            <div class="text-muted">
+                                Enable automation rules (lead/activity). Keep OFF until implemented.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_attribution_enabled"
+                                 string="Enable Revenue Attribution">
+                            <field name="website_sales_intelligence_attribution_enabled"/>
+                            <div class="text-muted">
+                                Enable attribution calculations. Keep OFF until implemented.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_ai_enabled"
+                                 string="Enable AI Insights">
+                            <field name="website_sales_intelligence_ai_enabled"/>
+                            <div class="text-muted">
+                                Enable AI predictions and summaries. Keep OFF until implemented.
+                            </div>
+                        </setting>
+
+                    </block>
+
+                    <!-- =======================================================
+                         Tracking & Ingestion
+                         ======================================================= -->
+                    <block id="website_sales_intelligence_block_tracking_ingestion"
+                           title="Tracking &amp; Ingestion">
+
+                        <setting id="website_sales_intelligence_setting_event_batch_max"
+                                 string="Frontend Batch Size">
+                            <field name="website_sales_intelligence_event_batch_max"/>
+                            <div class="text-muted">
+                                Max number of events sent per website request.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_flush_interval_seconds"
+                                 string="Flush Interval (seconds)">
+                            <field name="website_sales_intelligence_flush_interval_seconds"/>
+                            <div class="text-muted">
+                                Frontend sends queued events after this interval.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_session_idle_minutes"
+                                 string="Session Idle Timeout (minutes)">
+                            <field name="website_sales_intelligence_session_idle_minutes"/>
+                            <div class="text-muted">
+                                New session starts if no activity within this timeout.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_store_user_agent"
+                                 string="Store User Agent (optional)">
+                            <field name="website_sales_intelligence_store_user_agent"/>
+                            <div class="text-muted">
+                                Store full user agent string (consider privacy policy).
+                            </div>
+                        </setting>
+
+                    </block>
+
+                    <!-- =======================================================
+                         Retention
+                         ======================================================= -->
+                    <block id="website_sales_intelligence_block_retention"
+                           title="Retention &amp; Cleanup">
+
+                        <setting id="website_sales_intelligence_setting_event_retention_days"
+                                 string="Event Retention (days)">
+                            <field name="website_sales_intelligence_event_retention_days"/>
+                            <div class="text-muted">
+                                Events older than this can be cleaned by cron (future).
+                            </div>
+                        </setting>
+
+                    </block>
+
+                    <!-- =======================================================
+                         Scoring Thresholds
+                         ======================================================= -->
+                    <block id="website_sales_intelligence_block_scoring_thresholds"
+                           title="Intent Scoring Thresholds">
+
+                        <setting id="website_sales_intelligence_setting_warm_threshold"
+                                 string="Warm Threshold">
+                            <field name="website_sales_intelligence_warm_threshold"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_hot_threshold"
+                                 string="Hot Threshold">
+                            <field name="website_sales_intelligence_hot_threshold"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_very_hot_threshold"
+                                 string="Very Hot Threshold">
+                            <field name="website_sales_intelligence_very_hot_threshold"/>
+                        </setting>
+
+                    </block>
+
+                    <!-- =======================================================
+                         Scoring Weights
+                         ======================================================= -->
+                    <block id="website_sales_intelligence_block_scoring_weights"
+                           title="Intent Scoring Weights">
+
+                        <setting id="website_sales_intelligence_setting_weight_page_view"
+                                 string="Weight: Page View">
+                            <field name="website_sales_intelligence_weight_page_view"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_weight_product_view"
+                                 string="Weight: Product View">
+                            <field name="website_sales_intelligence_weight_product_view"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_weight_search"
+                                 string="Weight: Search">
+                            <field name="website_sales_intelligence_weight_search"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_weight_add_to_cart"
+                                 string="Weight: Add to Cart">
+                            <field name="website_sales_intelligence_weight_add_to_cart"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_weight_checkout_start"
+                                 string="Weight: Checkout Start">
+                            <field name="website_sales_intelligence_weight_checkout_start"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_weight_checkout_abandon"
+                                 string="Weight: Checkout Abandon">
+                            <field name="website_sales_intelligence_weight_checkout_abandon"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_weight_rfq_submit"
+                                 string="Weight: RFQ Submit">
+                            <field name="website_sales_intelligence_weight_rfq_submit"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_weight_contact_submit"
+                                 string="Weight: Contact Submit">
+                            <field name="website_sales_intelligence_weight_contact_submit"/>
+                        </setting>
+
+                    </block>
+
+                    <!-- =======================================================
+                         Automation (future)
+                         ======================================================= -->
+                    <block id="website_sales_intelligence_block_automation"
+                           title="Automation (Future)">
+
+                        <setting id="website_sales_intelligence_setting_auto_create_lead"
+                                 string="Auto-create Lead when Hot">
+                            <field name="website_sales_intelligence_auto_create_lead"/>
+                            <div class="text-muted">
+                                When enabled, system may create CRM lead when visitor becomes Hot.
+                            </div>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_lead_cooldown_hours"
+                                 string="Lead Creation Cooldown (hours)">
+                            <field name="website_sales_intelligence_lead_cooldown_hours"/>
+                        </setting>
+
+                    </block>
+
+                    <!-- =======================================================
+                         AI (future)
+                         ======================================================= -->
+                    <block id="website_sales_intelligence_block_ai"
+                           title="AI (Future)">
+
+                        <setting id="website_sales_intelligence_setting_ai_provider"
+                                 string="AI Provider">
+                            <field name="website_sales_intelligence_ai_provider"/>
+                        </setting>
+
+                        <setting id="website_sales_intelligence_setting_ai_model"
+                                 string="AI Model Name">
+                            <field name="website_sales_intelligence_ai_model"/>
+                        </setting>
+
+                    </block>
+
+                </app>
+
+            </xpath>
+
+        </field>
+    </record>
+   <!-- Proper settings action -->
+    <record id="website_sales_intelligence_action_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field
+            name="view_id"
+            ref="website_sales_intelligence.website_sales_intelligence_view_res_config_settings_form"
+        />
+        <field name="context">{'module' : 'website_sales_intelligence'}</field>
+    </record>
+</odoo>

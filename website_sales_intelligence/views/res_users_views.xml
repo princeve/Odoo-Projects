@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="website_sales_intelligence_view_res_users_form_inherit" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Website Sales Intelligence" name="website_sales_intelligence_user_page">
+                    <group>
+                        <group string="Routing">
+                            <field name="website_sales_enable_routing"/>
+                            <field name="website_sales_is_default_assignee"/>
+                            <field name="website_sales_priority"/>
+                            <field name="website_sales_max_leads_per_day"/>
+                            <field name="website_sales_allow_high_intent_only"/>
+                        </group>
+
+                        <group string="Eligibility Filters">
+                            <field name="website_sales_allowed_website_ids" widget="many2many_tags"/>
+                            <field name="website_sales_allowed_country_ids" widget="many2many_tags"/>
+                            <field name="website_sales_allowed_device_type"/>
+                        </group>
+                    </group>
+
+                    <group string="AI Preferences">
+                        <group>
+                            <field name="website_sales_enable_ai_assist"/>
+                            <field name="website_sales_preferred_action"/>
+                        </group>
+                    </group>
+
+                    <group string="Notes">
+                        <field name="website_sales_note"/>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

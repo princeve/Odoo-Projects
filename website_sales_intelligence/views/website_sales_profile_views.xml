@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST -->
+    <record id="website_sales_intelligence_view_website_sales_profile_list" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.profile.list</field>
+        <field name="model">website.sales.profile</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="last_updated_datetime"/>
+                <field name="visitor_id"/>
+                <field name="partner_id" optional="show"/>
+                <field name="lead_id" optional="show"/>
+                <field name="intent_level" optional="show"/>
+                <field name="intent_score" optional="show"/>
+                <field name="funnel_stage" optional="show"/>
+                <field name="lifetime_session_count" optional="show"/>
+                <field name="lifetime_event_count" optional="show"/>
+                <field name="primary_marketing_channel" optional="hide"/>
+                <field name="primary_device_type" optional="hide"/>
+                <field name="country_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM -->
+    <record id="website_sales_intelligence_view_website_sales_profile_form" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.profile.form</field>
+        <field name="model">website.sales.profile</field>
+        <field name="arch" type="xml">
+            <form string="Website Sales Profile">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Links">
+                            <field name="visitor_id"/>
+                            <field name="partner_id"/>
+                            <field name="lead_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="website_id"/>
+                        </group>
+
+                        <group string="Freshness">
+                            <field name="first_seen_datetime"/>
+                            <field name="last_seen_datetime"/>
+                            <field name="last_updated_datetime"/>
+                            <field name="is_stale"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Lifetime Activity">
+                            <group>
+                                <group>
+                                    <field name="lifetime_session_count"/>
+                                    <field name="lifetime_event_count"/>
+                                    <field name="lifetime_page_view_count"/>
+                                    <field name="lifetime_product_view_count"/>
+                                    <field name="lifetime_search_count"/>
+                                </group>
+                                <group>
+                                    <field name="lifetime_add_to_cart_count"/>
+                                    <field name="lifetime_remove_from_cart_count"/>
+                                    <field name="lifetime_checkout_start_count"/>
+                                    <field name="lifetime_checkout_submit_count"/>
+                                    <field name="lifetime_form_submit_count"/>
+                                    <field name="lifetime_rfq_submit_count"/>
+                                </group>
+                            </group>
+
+                            <group string="Engagement">
+                                <group>
+                                    <field name="lifetime_total_session_seconds"/>
+                                    <field name="average_session_seconds"/>
+                                </group>
+                                <group>
+                                    <field name="bounce_rate_percent"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Commerce">
+                            <group>
+                                <group string="Latest Cart">
+                                    <field name="last_cart_item_count"/>
+                                    <field name="last_cart_value"/>
+                                    <field name="last_checkout_abandoned"/>
+                                    <field name="currency_id"/>
+                                </group>
+
+                                <group string="Lifetime Revenue">
+                                    <field name="lifetime_order_count"/>
+                                    <field name="lifetime_revenue"/>
+                                    <field name="lifetime_average_order_value"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Interest">
+                            <group string="Quick Tags">
+                                <field name="interest_product_ids" widget="many2many_tags"/>
+                                <field name="interest_category_ids" widget="many2many_tags"/>
+                            </group>
+
+                            <group string="Top Content (JSON Snapshots)">
+                                <field name="top_pages_json" placeholder='[{"path":"/shop","views":50}]'/>
+                                <field name="top_products_json" placeholder='[{"product_id":12,"views":7}]'/>
+                                <field name="top_categories_json" placeholder='[{"category_id":3,"views":15}]'/>
+                                <field name="top_search_keywords_json" placeholder='[{"keyword":"PLC","count":5}]'/>
+                            </group>
+                        </page>
+
+                        <page string="Marketing">
+                            <group>
+                                <group>
+                                    <field name="primary_marketing_channel"/>
+                                    <field name="primary_utm_source"/>
+                                    <field name="primary_utm_medium"/>
+                                    <field name="primary_utm_campaign"/>
+                                </group>
+                                <group>
+                                    <field name="first_touch_utm_source"/>
+                                    <field name="last_touch_utm_source"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Device &amp; Location">
+                            <group>
+                                <group>
+                                    <field name="primary_device_type"/>
+                                    <field name="country_id"/>
+                                </group>
+                                <group>
+                                    <field name="region"/>
+                                    <field name="city"/>
+                                    <field name="timezone"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Scoring">
+                            <group>
+                                <group>
+                                    <field name="intent_level"/>
+                                    <field name="funnel_stage"/>
+                                    <field name="intent_score"/>
+                                    <field name="engagement_score"/>
+                                </group>
+                                <group>
+                                    <field name="urgency_score"/>
+                                    <field name="price_sensitivity_score"/>
+                                    <field name="ai_conversion_probability"/>
+                                    <field name="ai_next_best_action"/>
+                                </group>
+                            </group>
+
+                            <group string="AI Summary">
+                                <field name="ai_summary"/>
+                                <group>
+                                    <field name="ai_model_name"/>
+                                    <field name="ai_last_scored_at"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Debug">
+                            <group>
+                                <group>
+                                    <field name="correlation_id"/>
+                                    <field name="trace_id"/>
+                                </group>
+                                <group>
+                                    <field name="note"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="payload_json" placeholder='{"example":"profile"}'/>
+                            </group>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="website_sales_intelligence_action_website_sales_profiles" model="ir.actions.act_window">
+        <field name="name">Profiles</field>
+        <field name="res_model">website.sales.profile</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

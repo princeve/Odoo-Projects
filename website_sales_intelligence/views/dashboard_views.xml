@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Client Action: Dashboard -->
+    <record id="website_sales_intelligence_action_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">website_sales_intelligence_dashboard</field>
+    </record>
+
+</odoo>

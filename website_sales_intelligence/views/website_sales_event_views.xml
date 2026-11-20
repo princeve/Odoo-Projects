@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST -->
+    <record id="website_sales_intelligence_view_website_sales_event_list" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.event.list</field>
+        <field name="model">website.sales.event</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="event_datetime"/>
+                <field name="event_type"/>
+                <field name="event_category" optional="hide"/>
+                <field name="visitor_id"/>
+                <field name="session_id" optional="hide"/>
+                <field name="path" optional="show"/>
+                <field name="product_id" optional="hide"/>
+                <field name="quantity" optional="hide"/>
+                <field name="amount" optional="hide"/>
+                <field name="utm_source" optional="hide"/>
+                <field name="utm_medium" optional="hide"/>
+                <field name="utm_campaign" optional="hide"/>
+                <field name="device_type" optional="hide"/>
+                <field name="country_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM -->
+    <record id="website_sales_intelligence_view_website_sales_event_form" model="ir.ui.view">
+        <field name="name">website_sales_intelligence.website.sales.event.form</field>
+        <field name="model">website.sales.event</field>
+        <field name="arch" type="xml">
+            <form string="Website Sales Event">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Overview">
+                            <field name="event_uuid" readonly="1"/>
+                            <field name="event_datetime"/>
+                            <field name="event_source"/>
+                            <field name="event_category"/>
+                            <field name="event_type"/>
+                            <field name="event_name"/>
+                        </group>
+
+                        <group string="Links">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="website_id"/>
+                            <field name="visitor_id"/>
+                            <field name="session_id"/>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                            <field name="is_authenticated"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Navigation">
+                            <group>
+                                <group>
+                                    <field name="url"/>
+                                    <field name="path"/>
+                                    <field name="title"/>
+                                </group>
+                                <group>
+                                    <field name="referrer_url"/>
+                                    <field name="referrer_domain"/>
+                                    <field name="landing_url"/>
+                                    <field name="landing_path"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Marketing">
+                            <group>
+                                <group>
+                                    <field name="marketing_channel"/>
+                                    <field name="utm_source"/>
+                                    <field name="utm_medium"/>
+                                    <field name="utm_campaign"/>
+                                    <field name="utm_term"/>
+                                    <field name="utm_content"/>
+                                </group>
+                                <group>
+                                    <field name="gclid"/>
+                                    <field name="fbclid"/>
+                                    <field name="msclkid"/>
+                                    <field name="campaign_id"/>
+                                    <field name="source_id"/>
+                                    <field name="medium_id"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Commerce">
+                            <group>
+                                <group>
+                                    <field name="product_id"/>
+                                    <field name="product_template_id"/>
+                                    <field name="product_category_id"/>
+                                </group>
+                                <group>
+                                    <field name="quantity"/>
+                                    <field name="price_unit"/>
+                                    <field name="amount"/>
+                                    <field name="currency_id"/>
+                                </group>
+                            </group>
+
+                            <group string="Cart">
+                                <group>
+                                    <field name="cart_item_count"/>
+                                    <field name="cart_value"/>
+                                </group>
+                                <group>
+                                    <field name="sale_order_id"/>
+                                    <field name="sale_order_line_id"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Search &amp; Forms">
+                            <group string="Search">
+                                <field name="search_query"/>
+                                <field name="search_results_count"/>
+                            </group>
+
+                            <group string="Forms">
+                                <group>
+                                    <field name="form_name"/>
+                                    <field name="form_id"/>
+                                    <field name="form_result"/>
+                                </group>
+                                <group>
+                                    <field name="form_fields_json"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Device">
+                            <group>
+                                <group>
+                                    <field name="device_type"/>
+                                    <field name="user_agent"/>
+                                    <field name="ip_address"/>
+                                </group>
+                                <group>
+                                    <field name="country_id"/>
+                                    <field name="region"/>
+                                    <field name="city"/>
+                                    <field name="timezone"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <field name="consent_state"/>
+                            </group>
+                        </page>
+
+                        <page string="Technical">
+                            <group>
+                                <group>
+                                    <field name="correlation_id"/>
+                                    <field name="trace_id"/>
+                                </group>
+                                <group>
+                                    <field name="payload_json"/>
+                                    <field name="note"/>
+                                    <field name="active"/>
+                                </group>
+                            </group>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="website_sales_intelligence_action_website_sales_events" model="ir.actions.act_window">
+        <field name="name">Events</field>
+        <field name="res_model">website.sales.event</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
