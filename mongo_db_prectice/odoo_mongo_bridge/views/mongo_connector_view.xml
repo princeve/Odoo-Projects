@@ -1,0 +1,42 @@
+<odoo>
+    <!-- Form View -->
+        <record id="mongo_connector_form" model="ir.ui.view">
+        <field name="name">mongo.connector.form</field>
+        <field name="model">mongo.connector</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                       <button name="action_archive_all_sales"
+            string="Archive ALL Sales"
+            type="object"
+            class="btn btn-danger oe_highlight"/>
+
+    <!-- Restore sale orders from Mongo -->
+    <button name="action_restore_sales_from_mongo"
+            string="Restore Sales from Mongo"
+            type="object"
+            class="btn btn-primary oe_highlight"/>
+                </header>
+
+                
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="mongo_connector_action" model="ir.actions.act_window">
+        <field name="name">MongoDB Connector</field>
+        <field name="res_model">mongo.connector</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- TOP-LEVEL APP MENU (no parent!) -->
+    <menuitem id="menu_mongo_root"
+              name="MongoDB"
+              sequence="90"
+               parent="base.menu_users"
+              action="mongo_connector_action"
+
+              />
+</odoo>

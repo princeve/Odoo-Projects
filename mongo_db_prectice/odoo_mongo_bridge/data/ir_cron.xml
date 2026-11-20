@@ -1,0 +1,11 @@
+<odoo>
+    <record id="ir_cron_archive_old_sale_orders" model="ir.cron">
+        <field name="name">Archive Old Sale Orders to Mongo</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_archive_old_orders()</field>
+        <field name="interval_type">days</field>
+        <field name="interval_number">1</field>
+        <field name="active">True</field>
+    </record>
+</odoo>
