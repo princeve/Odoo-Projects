@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+odoo_mongo_bridge.access_sale_order_archive_viewer,access_sale_order_archive_viewer,odoo_mongo_bridge.model_sale_order_archive_viewer,base.group_user,1,1,1,1
